@@ -25,7 +25,7 @@ namespace Veterinar
         {
             InitializeComponent();
 
-            newFrame.NavigationService.Navigate(new AutorisationPage());
+            newFrame.NavigationService.Navigate(new Autorisation());
         }
     }
 }

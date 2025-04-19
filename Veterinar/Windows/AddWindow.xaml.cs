@@ -34,18 +34,11 @@ namespace Veterinar.Windows
             dpDate.SelectedDate = DateTime.Today;
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            var addAnimal = new AddAnimal();
-            if (addAnimal.ShowDialog() == true)
-            {
-                animals = DB.vet.Animals.ToList();
-                cbAnimal.ItemsSource = animals;
-                cbAnimal.Items.Refresh();
-            }
+            DialogResult = false;
+            Close();
         }
-
-
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -77,10 +70,15 @@ namespace Veterinar.Windows
             }
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
-            Close();
+            var addAnimal = new AddAnimal();
+            if (addAnimal.ShowDialog() == true)
+            {
+                animals = DB.vet.Animals.ToList();
+                cbAnimal.ItemsSource = animals;
+                cbAnimal.Items.Refresh();
+            }
         }
     }
 }

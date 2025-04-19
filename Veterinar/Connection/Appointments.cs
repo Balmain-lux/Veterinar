@@ -16,7 +16,7 @@ namespace Veterinar.Connection
     {
         public int appointment_id { get; set; }
         public Nullable<int> animal_id { get; set; }
-        public Nullable<int> doctor_id { get; set; }
+        public int doctor_id { get; set; }
         public System.DateTime appointment_date { get; set; }
         public string comment { get; set; }
         public Nullable<bool> is_deleted { get; set; }

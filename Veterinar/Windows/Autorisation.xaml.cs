@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,26 +18,26 @@ using Veterinar.Connection;
 namespace Veterinar.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для AutorisationPage.xaml
+    /// Логика взаимодействия для Autorisation.xaml
     /// </summary>
-    public partial class AutorisationPage : Page
+    public partial class Autorisation : Page
     {
         public static User user;
-        public AutorisationPage()
+        public Autorisation()
         {
             InitializeComponent();
         }
-        public User sotrudniks { get; set; }
+        public User sotrudnik { get; private set; }
         private void btnVhod_Click(object sender, RoutedEventArgs e)
         {
             string login = loginTxb.Text.Trim();
             string password = parolTxb.Password.Trim();
             user = Fun.AutoClass.AutorisationSotrudnik(login, password);
-            sotrudniks = Fun.AutoClass.AutorisationSotrudnik(login, password);
-            if (sotrudniks != null)
+            sotrudnik = Fun.AutoClass.AutorisationSotrudnik(login, password);
+            if (sotrudnik != null)
             {
-                UserPage userPage = new UserPage(user);
-                userPage.Show();
+                NavigationService.Navigate(new UserPage(user));
+
             }
             else MessageBox.Show("Логин или пароль неверный", "error", MessageBoxButton.OK, MessageBoxImage.Error);
         }

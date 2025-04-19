@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Veterinar.Connection;
 
@@ -18,7 +19,7 @@ namespace Veterinar.Windows
     /// <summary>
     /// Логика взаимодействия для UserPage.xaml
     /// </summary>
-    public partial class UserPage : Window
+    public partial class UserPage : Page
     {
         private User _user;
         private List<Appointments> appointments;
@@ -27,25 +28,61 @@ namespace Veterinar.Windows
             InitializeComponent();
             _user = user;
             dpDateTo.SelectedDate = DateTime.Today;
-            LoadedAppointments();
+            LoadAppointments();
         }
-        private void LoadedAppointments()
+        private void LoadAppointments()
         {
             appointments = DB.vet.Appointments.Where(a => a.doctor_id == _user.id_doctors && a.is_deleted == false).ToList();
             lvAppointments.ItemsSource = appointments;
             this.DataContext = this;
         }
-
-        private void txtAnimalSearch_TextChanged(object sender, TextChangedEventArgs e)
+        private void btnDeleteAppointment_Click(object sender, RoutedEventArgs e)
         {
-            var query = DB.vet.Appointments.Where(a => a.doctor_id == _user.id_doctors && a.is_deleted == false);
-            if (txtAnimalSearch.Text != null)
+            if (lvAppointments.SelectedItem is Appointments selected)
             {
-                var searchText = txtAnimalSearch.Text.ToLower();
-                query = query.Where(a => a.Animals.Name.ToLower().Contains(searchText));
+                if (MessageBox.Show("Удалить прием?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        DB.vet.Appointments.Remove(selected);
+                        DB.vet.SaveChanges();
+                        LoadAppointments();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка: {ex.Message}");
+                    }
+                }
             }
-            appointments = query.ToList();
-            lvAppointments.ItemsSource = appointments;
+            else
+            {
+                MessageBox.Show("Выберите прием для удаления");
+            }
+        }
+
+        private void btnEditAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvAppointments.SelectedItem is Appointments selected)
+            {
+                var editWindow = new EditWindow(selected);
+                if (editWindow.ShowDialog() == true)
+                {
+                    LoadAppointments();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите прием для редактирования");
+            }
+        }
+
+        private void btnAddAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            var addWindow = new AddWindow(_user.id_doctors.Value);
+            if (addWindow.ShowDialog() == true)
+            {
+                LoadAppointments();
+            }
         }
 
         private void btnApplyFilter_Click(object sender, RoutedEventArgs e)
@@ -60,7 +97,7 @@ namespace Veterinar.Windows
                 }
                 else
                 {
-                    LoadedAppointments();
+                    LoadAppointments();
                 }
                 lvAppointments.ItemsSource = appointments.ToList();
             }
@@ -71,53 +108,16 @@ namespace Veterinar.Windows
             }
         }
 
-        private void btnAddAppointment_Click(object sender, RoutedEventArgs e)
+        private void txtAnimalSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var addWindow = new AddWindow(_user.id_doctors.Value);
-            if (addWindow.ShowDialog() == true)
+            var query = DB.vet.Appointments.Where(a => a.doctor_id == _user.id_doctors && a.is_deleted == false);
+            if (txtAnimalSearch.Text != null)
             {
-                LoadedAppointments();
+                var searchText = txtAnimalSearch.Text.ToLower();
+                query = query.Where(a => a.Animals.Name.ToLower().Contains(searchText));
             }
-        }
-
-        private void btnEditAppointment_Click(object sender, RoutedEventArgs e)
-        {
-            if (lvAppointments.SelectedItem is Appointments selected)
-            {
-                var editWindow = new EditWindow(selected);
-                if (editWindow.ShowDialog() == true)
-                {
-                    LoadedAppointments();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Выберите прием для редактирования");
-            }
-        }
-
-        private void btnDeleteAppointment_Click(object sender, RoutedEventArgs e)
-        {
-            if (lvAppointments.SelectedItem is Appointments selected)
-            {
-                if (MessageBox.Show("Удалить прием?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    try
-                    {
-                        DB.vet.Appointments.Remove(selected);
-                        DB.vet.SaveChanges();
-                        LoadedAppointments();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Ошибка: {ex.Message}");
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Выберите прием для удаления");
-            }
+            appointments = query.ToList();
+            lvAppointments.ItemsSource = appointments;
         }
     }
 }

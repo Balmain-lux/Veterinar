@@ -45,7 +45,7 @@
         </ComboBox>
         <TextBlock Text="Комментарий:" Grid.Row="3" Grid.Column="0" Margin="5"/>
         <TextBox x:Name="tbComment" Grid.Row="3" Grid.Column="1" Margin="5" 
-         AcceptsReturn="True" TextWrapping="Wrap" Height="60"/>
+          AcceptsReturn="True" TextWrapping="Wrap" Height="60"/>
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="btnSave" Content="Сохранить" Width="100" Height="50" Margin="5" Click="btnSave_Click"/>
             <Button x:Name="btnCancel" Content="Отмена" Width="100" Height="50" Margin="5" Click="btnCancel_Click"/>

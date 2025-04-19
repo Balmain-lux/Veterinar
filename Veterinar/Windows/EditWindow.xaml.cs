@@ -35,6 +35,12 @@ namespace Veterinar.Windows
             tbComment.Text = _appointment.comment;
         }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -61,12 +67,6 @@ namespace Veterinar.Windows
                 MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
                               MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-            Close();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
