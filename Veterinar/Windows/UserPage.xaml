@@ -45,18 +45,18 @@
         <ListView Name="lvAppointments" Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="6">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding appointment_id}"/>
+                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding Appointments.appointment_id}"/>
                     <GridViewColumn Header="Дата" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding appointment_date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                <TextBlock Text="{Binding Appointments.appointment_date, StringFormat={}{0:dd.MM.yyyy}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Животное" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Animals.name}"/>
+                                <TextBlock Text="{Binding Animals.Name}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -84,7 +84,7 @@
                     <GridViewColumn Header="Комментарий" Width="200">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding comment}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Appointments.comment}" TextWrapping="Wrap"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

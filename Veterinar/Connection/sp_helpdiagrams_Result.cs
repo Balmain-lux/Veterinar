@@ -10,18 +10,13 @@
 namespace Veterinar.Connection
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Appointments
+    public partial class sp_helpdiagrams_Result
     {
-        public int appointment_id { get; set; }
-        public Nullable<int> animal_id { get; set; }
-        public Nullable<int> doctor_id { get; set; }
-        public System.DateTime appointment_date { get; set; }
-        public string comment { get; set; }
-        public Nullable<bool> is_deleted { get; set; }
-    
-        public virtual Animals Animals { get; set; }
-        public virtual Doctors Doctors { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

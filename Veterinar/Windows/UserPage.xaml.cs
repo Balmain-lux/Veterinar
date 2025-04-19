@@ -32,7 +32,7 @@ namespace Veterinar.Windows
         }
         private void LoadAppointments()
         {
-            appointments = DB.vet.Appointments.Where(a => a.doctor_id == _user.id_doctors && a.is_deleted == false).ToList();
+            appointments = DB.vet.Appointments.Where(a => a.Doctors.Id == _user.id_doctors && a.is_deleted == false).ToList();
             lvAppointments.ItemsSource = appointments;
             this.DataContext = this;
         }
@@ -78,6 +78,7 @@ namespace Veterinar.Windows
 
         private void btnAddAppointment_Click(object sender, RoutedEventArgs e)
         {
+            
             var addWindow = new AddWindow(_user.id_doctors.Value);
             if (addWindow.ShowDialog() == true)
             {
@@ -89,7 +90,7 @@ namespace Veterinar.Windows
         {
             try
             {
-                var query = DB.vet.Appointments.Where(a => a.doctor_id == _user.id_doctors && a.is_deleted == false);
+                var query = DB.vet.Appointments.Where(a => a.Doctors.Id == _user.id_doctors && a.is_deleted == false);
                 if (dpDateTo.SelectedDate.HasValue)
                 {
                     var filter = dpDateTo.SelectedDate.Value.Date;
@@ -110,7 +111,7 @@ namespace Veterinar.Windows
 
         private void txtAnimalSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var query = DB.vet.Appointments.Where(a => a.doctor_id == _user.id_doctors && a.is_deleted == false);
+            var query = DB.vet.Appointments.Where(a => a.Doctors.Id == _user.id_doctors && a.is_deleted == false);
             if (txtAnimalSearch.Text != null)
             {
                 var searchText = txtAnimalSearch.Text.ToLower();

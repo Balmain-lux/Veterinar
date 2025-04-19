@@ -25,7 +25,7 @@
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding name}"/>
+                        <TextBlock Text="{Binding Name}"/>
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
