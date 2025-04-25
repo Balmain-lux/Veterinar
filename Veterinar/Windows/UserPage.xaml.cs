@@ -29,6 +29,9 @@ namespace Veterinar.Windows
             _user = user;
             dpDateTo.SelectedDate = DateTime.Today;
             LoadAppointments();
+            appointments = new List<Appointments>(DB.vet.Appointments);
+            lvAppointments.ItemsSource=appointments;
+            this.DataContext = this;
         }
         private void LoadAppointments()
         {
@@ -79,7 +82,7 @@ namespace Veterinar.Windows
         private void btnAddAppointment_Click(object sender, RoutedEventArgs e)
         {
             
-            var addWindow = new AddWindow(_user.id_doctors.Value);
+            var addWindow = new AddWindow(_user);
             if (addWindow.ShowDialog() == true)
             {
                 LoadAppointments();

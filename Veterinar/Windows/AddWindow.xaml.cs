@@ -23,13 +23,15 @@ namespace Veterinar.Windows
         private int _doctorId;
         public static List<Animals> animals { get; set; }
         public static List<Doctors> doctors { get; set; }
-        public AddWindow(int doctorId)
+        public AddWindow(User user)
         {
             InitializeComponent();
-            _doctorId = doctorId;
+            _doctorId = Convert.ToInt32(user.id_doctors);
             animals = DB.vet.Animals.ToList();
+            animals = new List<Animals>(DB.vet.Animals);
             cbAnimal.ItemsSource = animals;
             doctors = DB.vet.Doctors.ToList();
+            doctors = new List<Doctors>(DB.vet.Doctors);
             cbDoc.ItemsSource = doctors;
             dpDate.SelectedDate = DateTime.Today;
         }
@@ -75,9 +77,9 @@ namespace Veterinar.Windows
             var addAnimal = new AddAnimal();
             if (addAnimal.ShowDialog() == true)
             {
-                animals = DB.vet.Animals.ToList();
-                cbAnimal.ItemsSource = animals;
-                cbAnimal.Items.Refresh();
+              animals = DB.vet.Animals.ToList();
+              cbAnimal.ItemsSource = animals;
+              cbAnimal.Items.Refresh();
             }
         }
     }

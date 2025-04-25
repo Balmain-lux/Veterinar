@@ -42,14 +42,14 @@
         <Button x:Name="btnApplyFilter" Content="Применить фильтр" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" 
         Margin="5" Click="btnApplyFilter_Click"/>
 
-        <ListView Name="lvAppointments" Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="6">
+        <ListView Name="lvAppointments" Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="6" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding Appointments.appointment_id}"/>
+                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding appointment_id}"/>
                     <GridViewColumn Header="Дата" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Appointments.appointment_date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                <TextBlock Text="{Binding appointment_date, StringFormat={}{0:dd.MM.yyyy}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -84,7 +84,7 @@
                     <GridViewColumn Header="Комментарий" Width="200">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Appointments.comment}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding comment}" TextWrapping="Wrap"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

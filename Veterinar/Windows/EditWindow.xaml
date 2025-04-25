@@ -28,11 +28,11 @@
         <DatePicker x:Name="dpDate" Grid.Row="1" Grid.Column="1" Margin="5"/>
 
         <TextBlock Text="Животное:" Grid.Row="2" Grid.Column="0" Margin="5"/>
-        <ComboBox x:Name="cbAnimal" Grid.Row="2" Grid.Column="1" Margin="5" ItemsSource="{Binding animals}" Width="500" HorizontalAlignment="Left">
+        <ComboBox x:Name="cbAnimal" Grid.Row="2" Grid.Column="1" Margin="5" ItemsSource="{Binding Animals}" Width="500" HorizontalAlignment="Left">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding name}"/>
+                        <TextBlock Text="{Binding Name}"/>
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
